@@ -1,0 +1,8 @@
+Q. What are the top 5 brands by receipts scanned for most recent month?
+
+Ans-
+select top 5 b.name
+from Receipt1 r1 inner join Receipt2 r2 on r1.pid = r2._ParentKeyField inner join Brand b on b.barcode = r2.barcode 
+where MONTH(dateScanned) = (select MONTH(max(dateScanned)) from r1)
+group by b.name
+order by count(r1._id)
